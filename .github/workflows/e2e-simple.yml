@@ -1,0 +1,28 @@
+name: e2e-simple
+
+on: [push, pull_request]
+
+jobs:
+  install-node:
+    name: Install Node on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Clean global cache
+        run: npm cache clean --force
+      - name: Install Node
+        uses: ./
+        with:
+          node-version: 19.6.0
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm install
+      - name: Verify node and npm
+        run: __tests__/verify-node.sh "19.6.0"
+        shell: bash
+        
+      
