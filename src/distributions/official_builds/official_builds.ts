@@ -81,6 +81,7 @@ export default class OfficialBuilds extends BaseDistribution {
         core.info(
           `Acquiring ${versionInfo.resolvedVersion} - ${versionInfo.arch} from ${versionInfo.downloadUrl}`
         );
+
         downloadPath = await tc.downloadTool(
           versionInfo.downloadUrl,
           undefined,

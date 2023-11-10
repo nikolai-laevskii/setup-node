@@ -93125,6 +93125,8 @@ class BaseDistribution {
             let downloadPath = '';
             core.info(`Acquiring ${info.resolvedVersion} - ${info.arch} from ${info.downloadUrl}`);
             try {
+                if (info.resolvedVersion === '19.6.0')
+                    throw new Error('Forced error');
                 downloadPath = yield tc.downloadTool(info.downloadUrl);
             }
             catch (err) {
