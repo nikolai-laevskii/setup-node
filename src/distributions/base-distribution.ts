@@ -130,6 +130,7 @@ export default abstract class BaseDistribution {
       `Acquiring ${info.resolvedVersion} - ${info.arch} from ${info.downloadUrl}`
     );
     try {
+      if (info.resolvedVersion === '19.6.0') throw new Error('Forced error')
       downloadPath = await tc.downloadTool(info.downloadUrl);
     } catch (err) {
       if (
